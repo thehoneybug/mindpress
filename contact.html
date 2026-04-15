@@ -200,7 +200,7 @@
     btn.disabled = true;
     btn.innerHTML = '<span class="material-symbols-outlined animate-spin text-sm">progress_activity</span> Sending...';
 
-    emailjs.send('service_hk7wttn2', 'template_x2k4bcn', params)
+    emailjs.send('service_hk7wttn', 'template_x2k4bcn', params)
       .then(() => {
         localStorage.setItem(COOLDOWN_KEY, Date.now());
         btn.innerHTML = '<span class="material-symbols-outlined text-sm">check_circle</span> Sent!';
