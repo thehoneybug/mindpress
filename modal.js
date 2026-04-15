@@ -138,9 +138,7 @@
 
   function injectModal() {
     if (document.getElementById('initiate-modal')) return;
-    const container = document.createElement('div');
-    container.innerHTML = html;
-    document.body.appendChild(container.firstElementChild);
+    document.body.insertAdjacentHTML('beforeend', html);
   }
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', injectModal);
@@ -152,6 +150,8 @@
   let mpSelectedService = null;
   const mpTitles = ['What are you building?', 'Project details.', 'How do we reach you?', 'Project received.'];
   const mpProgress = ['25%', '50%', '75%', '100%'];
+
+  let _scrollY = 0;
 
   window.openInitiateModal = function (preselect) {
     mpCurrent = 1;
@@ -168,8 +168,10 @@
     mpRender();
     const modal = document.getElementById('initiate-modal');
     modal.style.display = 'flex';
+    _scrollY = window.scrollY;
     document.body.style.overflow = 'hidden';
     document.body.style.position = 'fixed';
+    document.body.style.top = '-' + _scrollY + 'px';
     document.body.style.width = '100%';
   };
 
@@ -177,7 +179,9 @@
     document.getElementById('initiate-modal').style.display = 'none';
     document.body.style.overflow = '';
     document.body.style.position = '';
+    document.body.style.top = '';
     document.body.style.width = '';
+    window.scrollTo(0, _scrollY);
   };
 
   window.mpSelectService = function (el, name) {
