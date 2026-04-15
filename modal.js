@@ -1,5 +1,6 @@
 (function () {
   const html = `
+<style>@keyframes spin{to{transform:rotate(360deg)}}</style>
 <div id="initiate-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4">
   <div onclick="closeInitiateModal()" class="absolute inset-0 bg-[#09100c]/80" style="backdrop-filter:blur(20px)"></div>
   <div class="relative w-full max-w-2xl rounded-xl overflow-hidden shadow-2xl" style="background:#111a15;border:1px solid rgba(78,222,163,0.1)">
@@ -119,6 +120,8 @@
 
     </div>
 
+    <div id="mp-modal-err" style="display:none;text-align:center;padding:0 32px 12px;font-size:12px;color:rgba(248,113,113,.9)">Something went wrong — please try again.</div>
+
     <!-- Footer -->
     <div id="mp-footer" style="display:flex;align-items:center;justify-content:space-between;padding:0 32px 32px">
       <button id="mp-btn-back" onclick="mpStepBack()" style="display:none;background:none;border:none;cursor:pointer;color:#c1c9c1;font-weight:700;font-size:13px;font-family:Inter,sans-serif;display:flex;align-items:center;gap:8px;transition:color .2s" onmouseover="this.style.color='#4edea3'" onmouseout="this.style.color='#c1c9c1'">
@@ -175,15 +178,65 @@
     mpSelectedService = name;
   };
 
+  function mpLoadEmailJS(cb) {
+    if (window.emailjs) return cb();
+    const s = document.createElement('script');
+    s.src = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js';
+    s.onload = () => { emailjs.init('V7K3ChHw292fhrl0R'); cb(); };
+    document.head.appendChild(s);
+  }
+
   window.mpStepNext = function () {
     if (mpCurrent === 1 && !mpSelectedService) {
       document.querySelectorAll('.mp-service-card').forEach(c => {
-        c.style.animation = 'none';
         c.style.outline = '1px solid rgba(248,113,113,.4)';
         setTimeout(() => c.style.outline = 'none', 800);
       });
       return;
     }
+
+    // Step 3 → 4: send email before advancing
+    if (mpCurrent === 3) {
+      const first   = document.getElementById('mp-first').value.trim();
+      const email   = document.getElementById('mp-email').value.trim();
+      if (!first || !email) {
+        ['mp-first','mp-email'].forEach(id => {
+          const el = document.getElementById(id);
+          if (!el.value.trim()) { el.style.borderColor = 'rgba(248,113,113,.6)'; setTimeout(() => el.style.borderColor = '#3f4940', 1200); }
+        });
+        return;
+      }
+
+      const btn = document.getElementById('mp-btn-next');
+      btn.disabled = true;
+      btn.innerHTML = '<span class="material-symbols-outlined" style="font-size:18px;animation:spin 1s linear infinite">progress_activity</span>';
+
+      const params = {
+        from_name:  first + ' ' + document.getElementById('mp-last').value.trim(),
+        from_email: email,
+        service:    mpSelectedService,
+        message: [
+          'Company: '     + (document.getElementById('mp-company').value  || '—'),
+          'Project: '     + (document.getElementById('mp-proj-name').value || '—'),
+          'Description: ' + (document.getElementById('mp-proj-desc').value || '—'),
+          'Timeline: '    + (document.getElementById('mp-timeline').value  || '—'),
+          'Budget: '      + (document.getElementById('mp-budget').value    || '—'),
+        ].join('\n')
+      };
+
+      mpLoadEmailJS(() => {
+        emailjs.send('service_hk7wttn', 'template_x2k4bcn', params)
+          .then(() => { btn.disabled = false; mpCurrent++; mpRender(); })
+          .catch(() => {
+            btn.disabled = false;
+            btn.innerHTML = 'Continue <span class="material-symbols-outlined" style="font-size:18px">arrow_forward</span>';
+            const errEl = document.getElementById('mp-modal-err');
+            if (errEl) { errEl.style.display = 'block'; setTimeout(() => errEl.style.display = 'none', 3000); }
+          });
+      });
+      return;
+    }
+
     if (mpCurrent < 4) { mpCurrent++; mpRender(); }
   };
 
