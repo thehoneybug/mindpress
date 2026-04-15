@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Automation | Mindpress</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="favicon.svg">
+<meta name="theme-color" content="#10B981">
+<meta property="og:title" content="Automation | Mindpress">
+<meta property="og:description" content="Workflow automation that runs your business whether you are there or not.">
+<meta property="og:type" content="website">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "surface": "#0e1511",
+          "primary-fixed": "#4edea3",
+          "primary-container": "#064e3b",
+          "on-secondary-fixed-variant": "#2a4d43",
+          "on-secondary-fixed": "#002019",
+          "secondary-container": "#1a211d",
+          "inverse-on-surface": "#dde4dd",
+          "surface-container": "#151c18",
+          "on-surface": "#dde4dd",
+          "outline-variant": "#3f4943",
+          "surface-dim": "#09100c",
+          "on-surface-variant": "#9ca3af",
+          "error-container": "#93000a",
+          "tertiary-container": "#2d3430",
+          "on-primary-container": "#4edea3",
+          "on-secondary-container": "#dde4dd",
+          "outline": "#89948d",
+          "primary": "#10B981",
+          "surface-container-high": "#1e2622",
+          "tertiary-fixed-dim": "#a8cfc1",
+          "secondary": "#a8cfc1",
+          "on-tertiary": "#1a211d",
+          "inverse-primary": "#059669",
+          "surface-container-highest": "#28312c",
+          "on-primary-fixed": "#00210a",
+          "on-primary-fixed-variant": "#005323",
+          "surface-container-lowest": "#050907",
+          "on-primary": "#003916",
+          "surface-container-low": "#111814",
+          "tertiary": "#a8cfc1",
+          "surface-bright": "#313b35"
+        },
+        borderRadius: {
+          "DEFAULT": "0.125rem",
+          "lg": "0.25rem",
+          "xl": "0.5rem",
+          "full": "1rem"
+        },
+        fontFamily: {
+          "headline": ["Inter"],
+          "body": ["Inter"],
+          "label": ["Inter"]
+        }
+      }
+    }
+  }
+</script>
+<style>
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+  body { font-family: 'Inter', sans-serif; }
+  @keyframes hub-pulse { 0%,100% { filter: drop-shadow(0 0 4px rgba(78,222,163,0.55)); } 50% { filter: drop-shadow(0 0 9px rgba(78,222,163,0.9)); } }
+</style>
+</head>
+<body class="bg-surface text-on-surface font-body">
+
+<!-- Nav -->
+<nav class="fixed top-0 w-full z-50 bg-[#0e1511] shadow-[0px_4px_40px_rgba(221,228,221,0.06)] border-b border-[#dde4dd]/5">
+  <div class="flex justify-between items-center px-8 h-20 max-w-[1440px] mx-auto">
+    <a href="index.html" class="text-xl font-bold text-[#dde4dd] inline-flex items-start gap-[1px]" style="letter-spacing:-0.04em">Mind<span style="background:linear-gradient(135deg,#4edea3,#10B981);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">press</span><span class="material-symbols-outlined" style="font-size:0.52em;color:#4edea3;line-height:1;margin-top:-0.1em;font-variation-settings:'FILL' 1,'wght' 300,'GRAD' 0,'opsz' 20;filter:drop-shadow(0 0 5px rgba(78,222,163,0.7));animation:hub-pulse 3s ease-in-out infinite">hub</span></a>
+    <div class="hidden md:flex items-center gap-8">
+      <a href="index.html" class="text-[#dde4dd] opacity-80 font-['Inter'] font-medium text-[0.875rem] tracking-tight hover:text-[#4edea3] hover:opacity-100 transition-all duration-300">Home</a>
+      <a href="development.html" class="text-[#4edea3] font-semibold border-b-2 border-[#4edea3] pb-1 font-['Inter'] text-[0.875rem] tracking-tight">Services</a>
+      <a href="about.html" class="text-[#dde4dd] opacity-80 font-['Inter'] font-medium text-[0.875rem] tracking-tight hover:text-[#4edea3] hover:opacity-100 transition-all duration-300">About</a>
+      <a href="contact.html" class="text-[#dde4dd] opacity-80 font-['Inter'] font-medium text-[0.875rem] tracking-tight hover:text-[#4edea3] hover:opacity-100 transition-all duration-300">Contact</a>
+    </div>
+    <div class="flex items-center gap-4">
+      <button onclick="openInitiateModal()" class="bg-primary text-on-primary px-6 py-2.5 rounded-lg font-label font-bold text-sm active:scale-95 transition-transform hover:opacity-90">Get Started</button>
+    </div>
+  </div>
+</nav>
+
+<main class="pt-20">
+  <!-- Hero -->
+  <section class="relative px-8 py-24 max-w-7xl mx-auto overflow-hidden">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <div class="z-10">
+        <span class="inline-block px-4 py-1.5 rounded-lg bg-primary-container text-on-primary-container font-label text-xs font-bold tracking-widest mb-6">WORKFLOW ARCHITECTURE</span>
+        <h1 class="text-6xl md:text-8xl font-headline font-extrabold text-on-surface leading-[0.88] mb-8" style="letter-spacing:-0.045em">
+          Systems that work <span data-scramble style="background:linear-gradient(135deg,#4edea3 0%,#10B981 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">whether you are there or not.</span>
+        </h1>
+        <p class="text-lg text-on-surface-variant max-w-lg mb-10 leading-relaxed font-normal">
+          We build high-fidelity digital infrastructure that autonomously handles complexity, reducing man-hours and liberating your team for high-value strategic thinking.
+        </p>
+        <div class="flex gap-4">
+          <button class="bg-primary text-on-primary px-8 py-4 rounded-lg font-label font-bold transition-all hover:scale-[1.02] active:scale-95">Deploy My System</button>
+          <button class="bg-surface-container-highest text-on-surface px-8 py-4 rounded-lg font-label font-bold hover:bg-surface-bright transition-colors border border-outline-variant/30">View Playbook</button>
+        </div>
+      </div>
+      <div class="relative group">
+        <div class="absolute inset-16 bg-primary/20 blur-2xl rounded-full opacity-70 group-hover:opacity-100 transition-opacity duration-700"></div>
+        <div class="relative aspect-square">
+          <img class="w-full h-full object-cover transition-all duration-700"
+            style="
+              filter: brightness(0.78) saturate(0.5);
+              mask-image: radial-gradient(ellipse 62% 66% at 58% 46%, black 10%, rgba(0,0,0,0.65) 30%, rgba(0,0,0,0.15) 50%, transparent 65%);
+              -webkit-mask-image: radial-gradient(ellipse 62% 66% at 58% 46%, black 10%, rgba(0,0,0,0.65) 30%, rgba(0,0,0,0.15) 50%, transparent 65%);
+            "
+            onmouseover="this.style.filter='brightness(0.88) saturate(0.85)'"
+            onmouseout="this.style.filter='brightness(0.78) saturate(0.5)'"
+            src="https://images.pexels.com/photos/30547577/pexels-photo-30547577.jpeg?auto=compress&cs=tinysrgb&w=1280&h=1280&fit=crop"
+            alt="Abstract digital circuits">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Toolkit Bento -->
+  <section class="px-8 py-32 bg-surface-container border-y border-outline-variant/10">
+    <div class="max-w-7xl mx-auto">
+      <div class="mb-16">
+        <h2 class="text-4xl font-headline font-bold tracking-tight mb-4 text-primary">The Architect's Toolkit</h2>
+        <p class="text-on-surface-variant font-label text-sm uppercase tracking-widest font-semibold">Leveraging world-class automation frameworks.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Zapier & Make -->
+        <div class="md:col-span-2 bg-surface-container-highest p-10 rounded-lg flex flex-col justify-between border border-outline-variant/10">
+          <div>
+            <div class="flex gap-4 mb-6">
+              <span class="material-symbols-outlined text-primary text-4xl">hub</span>
+              <span class="material-symbols-outlined text-primary text-4xl">account_tree</span>
+            </div>
+            <h3 class="text-3xl font-headline font-bold mb-4">Zapier &amp; Make Integration</h3>
+            <p class="text-on-surface-variant leading-relaxed max-w-md font-normal">The nervous system of your business. We bridge the gap between 6,000+ apps, ensuring data flows instantly and accurately without manual intervention.</p>
+          </div>
+          <div class="mt-12 flex flex-wrap gap-3">
+            <span class="bg-surface-container px-4 py-2 rounded-lg text-xs font-semibold uppercase tracking-wider font-label border border-outline-variant/10">API Orchestration</span>
+            <span class="bg-surface-container px-4 py-2 rounded-lg text-xs font-semibold uppercase tracking-wider font-label border border-outline-variant/10">Error Handling</span>
+            <span class="bg-surface-container px-4 py-2 rounded-lg text-xs font-semibold uppercase tracking-wider font-label border border-outline-variant/10">Multi-step Logic</span>
+          </div>
+        </div>
+        <!-- ZeroWork -->
+        <div class="bg-primary-container p-10 rounded-lg text-on-primary-container flex flex-col justify-between border border-primary/20">
+          <div>
+            <span class="material-symbols-outlined text-5xl mb-6 block">precision_manufacturing</span>
+            <h3 class="text-3xl font-headline font-bold mb-4">ZeroWork</h3>
+            <p class="text-on-primary-container/90 leading-relaxed font-normal">No-code task bots that mimic human interaction. Perfect for legacy systems without APIs.</p>
+          </div>
+          <div class="bg-black/20 p-4 rounded-lg mt-8 border border-white/5">
+            <p class="text-[0.6875rem] font-semibold uppercase tracking-widest text-[#4edea3] mb-2">Automates</p>
+            <p class="font-headline font-bold text-lg">Browser-based Repetitive Tasks</p>
+          </div>
+        </div>
+        <!-- AI Logic -->
+        <div class="bg-surface-container-highest p-10 rounded-lg flex flex-col justify-between border border-outline-variant/10 border-t-2 border-t-primary/50">
+          <div>
+            <span class="material-symbols-outlined text-primary text-5xl mb-6 block">cognition</span>
+            <h3 class="text-3xl font-headline font-bold mb-4">Claude &amp; Gemini</h3>
+            <p class="text-on-surface-variant leading-relaxed font-normal">Intelligent decision nodes that categorize, summarize, and respond with human-like nuance inside your workflows.</p>
+          </div>
+        </div>
+        <!-- Claude Code -->
+        <div class="md:col-span-2 bg-surface-container-high p-10 rounded-lg flex items-center gap-12 border border-outline-variant/10">
+          <div class="flex-1">
+            <h3 class="text-3xl font-headline font-bold mb-4">Claude Code</h3>
+            <p class="text-on-surface-variant leading-relaxed font-normal">Autonomous coding agents that build, test, and deploy small-scale automation scripts instantly, bypassing traditional dev cycles.</p>
+          </div>
+          <div class="hidden lg:block w-48 h-48 bg-gradient-to-tr from-primary/20 to-surface-container-highest rounded-full blur-2xl animate-pulse"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Case Study -->
+  <section class="px-8 py-32 max-w-7xl mx-auto">
+    <div class="bg-surface-container p-12 md:p-24 rounded-lg relative overflow-hidden border border-outline-variant/10">
+      <div class="absolute top-0 right-0 p-8 opacity-10">
+        <span class="material-symbols-outlined text-[160px]" style="font-variation-settings: 'FILL' 1;">monitoring</span>
+      </div>
+      <div class="relative z-10 max-w-3xl">
+        <span class="text-primary font-label text-xs font-bold uppercase tracking-[0.2em] mb-4 block">Success Architecture</span>
+        <h2 class="text-4xl md:text-6xl font-headline font-extrabold mb-10 leading-tight tracking-tighter">The Outreach Pulse System</h2>
+        <div class="space-y-12">
+          <div class="flex gap-6">
+            <div class="w-1 bg-primary rounded-full"></div>
+            <div>
+              <h4 class="text-xl font-bold mb-2">The Challenge</h4>
+              <p class="text-on-surface-variant leading-relaxed">A high-growth agency spent 15 man-hours weekly manually checking email deliverability and response rates across 40+ separate accounts.</p>
+            </div>
+          </div>
+          <div class="flex gap-6">
+            <div class="w-1 bg-tertiary rounded-full"></div>
+            <div>
+              <h4 class="text-xl font-bold mb-2">The Solution</h4>
+              <p class="text-on-surface-variant leading-relaxed">We architected an autonomous monitoring engine. Using a combination of custom APIs and AI classification, the system now flags low-performing accounts in real-time and updates a centralized dashboard automatically.</p>
+            </div>
+          </div>
+          <div class="pt-8 border-t border-outline-variant/10">
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-8">
+              <div>
+                <p class="text-primary text-4xl font-headline font-extrabold">100%</p>
+                <p class="text-[0.6875rem] font-semibold uppercase tracking-widest text-on-surface-variant mt-1">Autonomous</p>
+              </div>
+              <div>
+                <p class="text-primary text-4xl font-headline font-extrabold">-15</p>
+                <p class="text-[0.6875rem] font-semibold uppercase tracking-widest text-on-surface-variant mt-1">Hours Weekly</p>
+              </div>
+              <div class="col-span-2 md:col-span-1">
+                <p class="text-primary text-4xl font-headline font-extrabold">Live</p>
+                <p class="text-[0.6875rem] font-semibold uppercase tracking-widest text-on-surface-variant mt-1">Incident Response</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="px-8 py-32 text-center max-w-5xl mx-auto">
+    <h2 class="text-5xl md:text-8xl font-headline font-extrabold mb-8 leading-tight italic" style="letter-spacing:-0.045em">Don't work for your tools. <span style="background:linear-gradient(135deg,#4edea3,#10B981);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Make them work for you.</span></h2>
+    <p class="text-xl text-on-surface-variant mb-12 max-w-2xl mx-auto leading-relaxed">The Digital Park is open. Are you ready to scale beyond your physical limits?</p>
+    <button onclick="openInitiateModal()" class="bg-primary text-on-primary px-12 py-5 rounded-lg font-label font-bold text-lg hover:scale-105 transition-transform shadow-lg shadow-primary/20">Schedule Design Consultation</button>
+  </section>
+</main>
+
+<!-- Footer -->
+<footer class="bg-[#09100c] w-full py-12">
+  <div class="max-w-[1440px] mx-auto px-8">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-12 pb-12">
+      <div class="md:col-span-2">
+        <div class="text-lg font-bold text-[#dde4dd] mb-6">Mindpress</div>
+        <p class="text-on-surface-variant font-['Inter'] text-sm max-w-sm mb-6 leading-relaxed">Building the infrastructure of tomorrow. We specialize in workflow automation, digital product architecture, and AI integration.</p>
+      </div>
+      <div>
+        <h4 class="text-[#4edea3] font-semibold font-['Inter'] text-[0.6875rem] uppercase tracking-widest mb-6">Solutions</h4>
+        <div class="flex flex-col gap-4">
+          <a href="development.html" class="text-[#dde4dd] opacity-60 font-['Inter'] text-sm hover:text-[#4edea3] transition-colors">Development</a>
+          <a href="automation.html" class="text-[#4edea3] font-semibold font-['Inter'] text-sm">Automation</a>
+          <a href="email.html" class="text-[#dde4dd] opacity-60 font-['Inter'] text-sm hover:text-[#4edea3] transition-colors">Email</a>
+        </div>
+      </div>
+      <div>
+        <h4 class="text-[#4edea3] font-semibold font-['Inter'] text-[0.6875rem] uppercase tracking-widest mb-6">Legal</h4>
+        <div class="flex flex-col gap-4">
+          <a href="#" class="text-[#dde4dd] opacity-60 font-['Inter'] text-sm hover:text-[#4edea3] transition-colors">Privacy Policy</a>
+          <a href="#" class="text-[#dde4dd] opacity-60 font-['Inter'] text-sm hover:text-[#4edea3] transition-colors">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-[#dde4dd]/15">
+      <p class="text-[#dde4dd] opacity-60 font-['Inter'] text-[0.6875rem] font-semibold uppercase tracking-widest mb-4 md:mb-0">© 2025 Mindpress Digital. All rights reserved.</p>
+      <div class="flex gap-8">
+        <a href="contact.html" class="text-[#dde4dd] opacity-60 font-['Inter'] text-[0.6875rem] font-semibold uppercase tracking-widest hover:text-[#4edea3] transition-colors">Contact</a>
+        <a href="#" class="text-[#dde4dd] opacity-60 font-['Inter'] text-[0.6875rem] font-semibold uppercase tracking-widest hover:text-[#4edea3] transition-colors">Status</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="modal.js"></script>
+<script src="fx.js"></script>
+</body>
+</html>
