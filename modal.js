@@ -1,9 +1,9 @@
 (function () {
   const html = `
 <style>@keyframes spin{to{transform:rotate(360deg)}}</style>
-<div id="initiate-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4">
-  <div onclick="closeInitiateModal()" class="absolute inset-0 bg-[#09100c]/80" style="backdrop-filter:blur(20px)"></div>
-  <div class="relative w-full max-w-2xl rounded-xl overflow-hidden shadow-2xl" style="background:#111a15;border:1px solid rgba(78,222,163,0.1)">
+<div id="initiate-modal" style="display:none;position:fixed;inset:0;z-index:100;align-items:center;justify-content:center;padding:16px;-webkit-overflow-scrolling:touch">
+  <div onclick="closeInitiateModal()" style="position:absolute;inset:0;background:rgba(9,16,12,0.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);cursor:pointer;-webkit-tap-highlight-color:transparent"></div>
+  <div class="relative w-full max-w-2xl rounded-xl shadow-2xl" style="background:#111a15;border:1px solid rgba(78,222,163,0.1);max-height:90vh;overflow-y:auto;-webkit-overflow-scrolling:touch">
 
     <div class="h-0.5" style="background:#1a211d">
       <div id="mp-progress" class="h-full transition-all duration-500" style="background:#4edea3;width:25%"></div>
@@ -161,11 +161,15 @@
     const modal = document.getElementById('initiate-modal');
     modal.style.display = 'flex';
     document.body.style.overflow = 'hidden';
+    document.body.style.position = 'fixed';
+    document.body.style.width = '100%';
   };
 
   window.closeInitiateModal = function () {
     document.getElementById('initiate-modal').style.display = 'none';
     document.body.style.overflow = '';
+    document.body.style.position = '';
+    document.body.style.width = '';
   };
 
   window.mpSelectService = function (el, name) {
