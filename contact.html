@@ -100,38 +100,40 @@
     <!-- Right: Form -->
     <div class="bg-surface-container p-10 rounded-xl border border-outline-variant/10">
       <h2 class="text-2xl font-headline font-bold mb-8">Initiate a Project</h2>
-      <form class="space-y-6">
+      <form id="contact-form" class="space-y-6">
+        <input name="hp_field" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;" aria-hidden="true">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
             <label class="font-label text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-2 block">First Name</label>
-            <input type="text" placeholder="John" class="w-full bg-surface-container-highest text-on-surface rounded-lg px-4 py-3 text-sm border-none placeholder-on-surface-variant/40 transition-all">
+            <input name="first_name" type="text" placeholder="John" required class="w-full bg-surface-container-highest text-on-surface rounded-lg px-4 py-3 text-sm border-none placeholder-on-surface-variant/40 transition-all">
           </div>
           <div>
             <label class="font-label text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-2 block">Last Name</label>
-            <input type="text" placeholder="Doe" class="w-full bg-surface-container-highest text-on-surface rounded-lg px-4 py-3 text-sm border-none placeholder-on-surface-variant/40 transition-all">
+            <input name="last_name" type="text" placeholder="Doe" required class="w-full bg-surface-container-highest text-on-surface rounded-lg px-4 py-3 text-sm border-none placeholder-on-surface-variant/40 transition-all">
           </div>
         </div>
         <div>
           <label class="font-label text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-2 block">Email</label>
-          <input type="email" placeholder="john@company.com" class="w-full bg-surface-container-highest text-on-surface rounded-lg px-4 py-3 text-sm border-none placeholder-on-surface-variant/40 transition-all">
+          <input name="from_email" type="email" placeholder="john@company.com" required class="w-full bg-surface-container-highest text-on-surface rounded-lg px-4 py-3 text-sm border-none placeholder-on-surface-variant/40 transition-all">
         </div>
         <div>
           <label class="font-label text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-2 block">Service Interest</label>
-          <select class="w-full bg-surface-container-highest text-on-surface rounded-lg px-4 py-3 text-sm border-none transition-all">
+          <select name="service" class="w-full bg-surface-container-highest text-on-surface rounded-lg px-4 py-3 text-sm border-none transition-all">
             <option value="" class="bg-surface-container-highest">Select a service...</option>
-            <option value="dev" class="bg-surface-container-highest">Development</option>
-            <option value="auto" class="bg-surface-container-highest">Automation</option>
-            <option value="email" class="bg-surface-container-highest">Email Infrastructure</option>
-            <option value="all" class="bg-surface-container-highest">Full Stack Package</option>
+            <option value="Development" class="bg-surface-container-highest">Development</option>
+            <option value="Automation" class="bg-surface-container-highest">Automation</option>
+            <option value="Email Infrastructure" class="bg-surface-container-highest">Email Infrastructure</option>
+            <option value="Full Stack Package" class="bg-surface-container-highest">Full Stack Package</option>
           </select>
         </div>
         <div>
           <label class="font-label text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-2 block">Message</label>
-          <textarea rows="5" placeholder="Tell us about your project..." class="w-full bg-surface-container-highest text-on-surface rounded-lg px-4 py-3 text-sm border-none placeholder-on-surface-variant/40 transition-all resize-none"></textarea>
+          <textarea name="message" rows="5" placeholder="Tell us about your project..." required class="w-full bg-surface-container-highest text-on-surface rounded-lg px-4 py-3 text-sm border-none placeholder-on-surface-variant/40 transition-all resize-none"></textarea>
         </div>
-        <button type="submit" class="w-full bg-primary text-on-primary py-4 rounded-lg font-bold font-label text-base hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-2">
+        <button id="submit-btn" type="submit" class="w-full bg-primary text-on-primary py-4 rounded-lg font-bold font-label text-base hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-2">
           Send Message <span class="material-symbols-outlined text-sm">send</span>
         </button>
+        <p id="form-msg" class="text-center text-sm hidden"></p>
       </form>
     </div>
   </div>
@@ -149,6 +151,71 @@
   </div>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+  emailjs.init('V7K3ChHw292fhrl0R');
+
+  const COOLDOWN_MS = 60000; // 60s between submissions
+  const COOLDOWN_KEY = 'mp_last_submit';
+
+  function showMsg(text, color) {
+    const msg = document.getElementById('form-msg');
+    msg.textContent = text;
+    msg.className = 'text-center text-sm ' + color;
+  }
+
+  function resetBtn(btn) {
+    btn.disabled = false;
+    btn.innerHTML = 'Send Message <span class="material-symbols-outlined text-sm">send</span>';
+    btn.classList.replace('bg-emerald-600', 'bg-primary');
+  }
+
+  document.getElementById('contact-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const btn  = document.getElementById('submit-btn');
+    const form = this;
+
+    // 1. Domain restriction — handled in EmailJS dashboard (no code needed)
+
+    // 2. Honeypot — bot filled the hidden field
+    if (form.hp_field.value) return;
+
+    // 3. Cloudflare Turnstile — add when site key is ready (token check goes here)
+
+    // 4. Cooldown — block resubmission within 60s
+    const last = parseInt(localStorage.getItem(COOLDOWN_KEY) || '0');
+    const remaining = Math.ceil((COOLDOWN_MS - (Date.now() - last)) / 1000);
+    if (remaining > 0) {
+      showMsg(`Please wait ${remaining}s before sending again.`, 'text-yellow-400');
+      return;
+    }
+
+    const params = {
+      from_name: form.first_name.value + ' ' + form.last_name.value,
+      from_email: form.from_email.value,
+      service:    form.service.value || 'Not specified',
+      message:    form.message.value
+    };
+
+    btn.disabled = true;
+    btn.innerHTML = '<span class="material-symbols-outlined animate-spin text-sm">progress_activity</span> Sending...';
+
+    emailjs.send('service_hk7wttn2', 'template_x2k4bcn', params)
+      .then(() => {
+        localStorage.setItem(COOLDOWN_KEY, Date.now());
+        btn.innerHTML = '<span class="material-symbols-outlined text-sm">check_circle</span> Sent!';
+        btn.classList.replace('bg-primary', 'bg-emerald-600');
+        showMsg("We'll be in touch within 24 hours.", 'text-[#4edea3]');
+        form.reset();
+        setTimeout(() => { resetBtn(btn); showMsg('', 'hidden'); }, 4000);
+      })
+      .catch((err) => {
+        console.error('EmailJS error:', JSON.stringify(err));
+        resetBtn(btn);
+        showMsg('Something went wrong. Please try again.', 'text-red-400');
+      });
+  });
+</script>
 <script src="fx.js"></script>
 </body>
 </html>
