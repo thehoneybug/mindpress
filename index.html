@@ -40,6 +40,7 @@
   .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
   @keyframes hub-spin { 0% { transform:rotate(0deg) scale(1); filter:drop-shadow(0 0 4px rgba(78,222,163,0.5)); } 50% { transform:rotate(180deg) scale(1.35); filter:drop-shadow(0 0 10px rgba(78,222,163,0.95)); } 100% { transform:rotate(360deg) scale(1); filter:drop-shadow(0 0 4px rgba(78,222,163,0.5)); } }
   @keyframes press-shimmer { 0% { background-position:0% center; } 100% { background-position:250% center; } }
+  @keyframes livepulse { 0%,100% { opacity:1; transform:scale(1); } 50% { opacity:0.35; transform:scale(0.75); } }
   body { font-family: 'Inter', sans-serif; }
   .glass-effect { backdrop-filter: blur(16px); }
 </style>
@@ -58,10 +59,21 @@
     </div>
     <div class="flex items-center gap-6">
       <button onclick="openInitiateModal()" class="bg-[#10B981] text-[#002111] px-6 py-2 rounded-lg font-bold font-['Inter'] active:scale-95 transition-transform">Get Started</button>
-      <span class="material-symbols-outlined text-[#dde4dd] opacity-80 cursor-pointer hover:text-[#4edea3] transition-colors md:hidden">menu</span>
+      <span onclick="toggleMobileNav()" class="material-symbols-outlined text-[#dde4dd] opacity-80 cursor-pointer hover:text-[#4edea3] transition-colors md:hidden" style="-webkit-tap-highlight-color:transparent">menu</span>
     </div>
   </div>
+  <!-- Mobile nav -->
+  <div id="mobile-nav" style="display:none;flex-direction:column;gap:0;border-top:1px solid rgba(78,222,163,0.1);background:#0e1511">
+    <a href="index.html" class="px-8 py-4 text-[#4edea3] font-bold text-sm border-b border-[#dde4dd]/5">Home</a>
+    <a href="development.html" class="px-8 py-4 text-[#dde4dd] font-medium text-sm border-b border-[#dde4dd]/5 hover:text-[#4edea3]">Services</a>
+    <a href="about.html" class="px-8 py-4 text-[#dde4dd] font-medium text-sm border-b border-[#dde4dd]/5 hover:text-[#4edea3]">About</a>
+    <a href="contact.html" class="px-8 py-4 text-[#dde4dd] font-medium text-sm border-b border-[#dde4dd]/5 hover:text-[#4edea3]">Contact</a>
+    <div class="px-8 py-4"><button onclick="openInitiateModal();toggleMobileNav()" class="w-full bg-[#10B981] text-[#002111] py-3 rounded-lg font-bold text-sm">Get Started</button></div>
+  </div>
 </nav>
+<script>
+  function toggleMobileNav(){var n=document.getElementById('mobile-nav');n.style.display=n.style.display==='flex'?'none':'flex';}
+</script>
 
 <main>
   <!-- Hero -->
@@ -73,7 +85,7 @@
     <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-16 items-center z-10">
       <div>
         <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-lg bg-surface-container-high mb-8 text-primary border border-outline-variant/15">
-          <span class="material-symbols-outlined text-sm">verified</span>
+          <span style="width:6px;height:6px;border-radius:50%;background:#ef4444;display:inline-block;animation:livepulse 1.8s ease-in-out infinite;flex-shrink:0"></span>
           <span class="font-label text-[10px] font-bold tracking-wider uppercase">Trusted by 100+ International Clients</span>
         </div>
         <h1 class="text-6xl md:text-8xl font-headline font-black leading-[0.9] text-on-surface mb-8" style="letter-spacing:-0.045em">We build&nbsp;<br><span data-scramble style="background:linear-gradient(135deg,#4edea3 0%,#10B981 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Systems</span></h1>

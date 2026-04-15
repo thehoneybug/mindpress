@@ -1,21 +1,21 @@
 (function () {
 
-  // ── Cursor spotlight ──────────────────────────────────────────────────────
-  const spotlight = document.createElement('div');
-  Object.assign(spotlight.style, {
-    position: 'fixed', inset: '0', pointerEvents: 'none', zIndex: '9998',
-    background: 'radial-gradient(650px circle at var(--mx,50%) var(--my,-20%), rgba(16,185,129,0.07), transparent 55%)'
-  });
-  document.body.appendChild(spotlight);
+  // ── Cursor spotlight (desktop only) ──────────────────────────────────────
+  const isTouchOnly = window.matchMedia('(hover:none)').matches;
+  if (!isTouchOnly) {
+    const spotlight = document.createElement('div');
+    spotlight.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;pointer-events:none;z-index:99;background:radial-gradient(650px circle at var(--mx,50%) var(--my,-20%),rgba(16,185,129,0.07),transparent 55%)';
+    document.body.appendChild(spotlight);
 
-  let raf;
-  document.addEventListener('mousemove', e => {
-    cancelAnimationFrame(raf);
-    raf = requestAnimationFrame(() => {
-      document.documentElement.style.setProperty('--mx', e.clientX + 'px');
-      document.documentElement.style.setProperty('--my', e.clientY + 'px');
+    let raf;
+    document.addEventListener('mousemove', e => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        document.documentElement.style.setProperty('--mx', e.clientX + 'px');
+        document.documentElement.style.setProperty('--my', e.clientY + 'px');
+      });
     });
-  });
+  }
 
   // ── Text scramble ─────────────────────────────────────────────────────────
   const CHARS = '01アイウエオ!<>[]{}=+*#abcdefghijklmnopqrstuvwxyz';

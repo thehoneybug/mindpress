@@ -136,9 +136,17 @@
   </div>
 </div>`;
 
-  const container = document.createElement('div');
-  container.innerHTML = html;
-  document.body.appendChild(container.firstElementChild);
+  function injectModal() {
+    if (document.getElementById('initiate-modal')) return;
+    const container = document.createElement('div');
+    container.innerHTML = html;
+    document.body.appendChild(container.firstElementChild);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', injectModal);
+  } else {
+    injectModal();
+  }
 
   let mpCurrent = 1;
   let mpSelectedService = null;
