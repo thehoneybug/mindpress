@@ -249,7 +249,12 @@
       from_name: form.first_name.value + ' ' + form.last_name.value,
       from_email: form.from_email.value,
       service:    form.service.value || 'Not specified',
-      message:    form.message.value
+      message: [
+        'Name: '    + form.first_name.value + ' ' + form.last_name.value,
+        'Email: '   + form.from_email.value,
+        'Service: ' + (form.service.value || 'Not specified'),
+        'Message: ' + form.message.value,
+      ].join('\n')
     };
 
     btn.disabled = true;

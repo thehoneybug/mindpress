@@ -232,6 +232,9 @@
         from_email: email,
         service:    mpSelectedService,
         message: [
+          'Name: '        + first + ' ' + document.getElementById('mp-last').value.trim(),
+          'Email: '       + email,
+          'Service: '     + mpSelectedService,
           'Company: '     + (document.getElementById('mp-company').value  || '—'),
           'Project: '     + (document.getElementById('mp-proj-name').value || '—'),
           'Description: ' + (document.getElementById('mp-proj-desc').value || '—'),

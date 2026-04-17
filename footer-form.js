@@ -23,7 +23,7 @@
         from_name:  name,
         from_email: email,
         service:    'Website Enquiry',
-        message:    idea || '(No details provided)'
+        message:    ['Name: ' + name, 'Email: ' + email, 'Enquiry: ' + (idea || '(No details provided)')].join('\n')
       }).then(() => {
         btn.style.display = 'none';
         msg.style.color = '#4edea3';

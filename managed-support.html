@@ -70,7 +70,13 @@
     <a href="contact.html" class="px-8 py-4 text-[#dde4dd] font-medium text-sm border-b border-[#dde4dd]/5">Contact</a>
   </div>
 </nav>
-<script>function toggleMobileNav(){var n=document.getElementById('mobile-nav');n.style.display=n.style.display==='flex'?'none':'flex';}</script>
+<script>
+function toggleMobileNav(){var n=document.getElementById('mobile-nav');n.style.display=n.style.display==='flex'?'none':'flex';}
+function hireSupport(type){
+  document.getElementById('sf-type').value=type;
+  document.getElementById('contact-form-section').scrollIntoView({behavior:'smooth'});
+}
+</script>
 
 <main class="pt-24">
 
@@ -79,7 +85,7 @@
     <div class="max-w-7xl mx-auto text-center">
       <span class="font-label text-primary uppercase tracking-[0.2em] text-xs font-bold mb-6 block">Managed Support</span>
       <h1 class="text-5xl md:text-8xl font-headline font-black text-on-surface leading-[0.9] mb-6" style="letter-spacing:-0.045em">
-        Ever thought of a<br><span style="background:linear-gradient(135deg,#4edea3 0%,#10B981 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">back office in India?</span>
+        Your Back Office in India,<br><span style="background:linear-gradient(135deg,#4edea3 0%,#10B981 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Ready to Work.</span>
       </h1>
       <p class="text-lg md:text-xl text-on-surface-variant max-w-2xl mx-auto mb-12 leading-relaxed">
         Labour costs in Western markets are high. Skilled teams in India are not. We give you a dedicated back office — technical and non-technical — that works on your schedule, under your direction, at a fraction of the cost.
@@ -212,7 +218,7 @@
               </div>
             </div>
           </div>
-          <button onclick="openInitiateModal()" class="mt-8 w-full bg-primary text-on-primary py-3 rounded-lg font-bold text-sm active:scale-95 transition-all">Hire Technical Support</button>
+          <button onclick="hireSupport('Technical Support')" class="mt-8 w-full bg-primary text-on-primary py-3 rounded-lg font-bold text-sm active:scale-95 transition-all">Hire Technical Support</button>
         </div>
       </div>
 
@@ -289,7 +295,7 @@
               </div>
             </div>
           </div>
-          <button onclick="openInitiateModal()" class="mt-8 w-full bg-surface-container-highest text-on-surface py-3 rounded-lg font-bold text-sm active:scale-95 transition-all border border-outline-variant/20">Hire Operations Support</button>
+          <button onclick="hireSupport('Non-Technical / Admin Support')" class="mt-8 w-full bg-surface-container-highest text-on-surface py-3 rounded-lg font-bold text-sm active:scale-95 transition-all border border-outline-variant/20">Hire Operations Support</button>
         </div>
       </div>
 
@@ -332,7 +338,7 @@
   </section>
 
   <!-- Bold CTA -->
-  <section class="px-8 py-24 max-w-7xl mx-auto">
+  <section id="contact-form-section" class="px-8 py-24 max-w-7xl mx-auto">
     <div class="rounded-2xl overflow-hidden" style="border:1px solid rgba(78,222,163,0.2);background:linear-gradient(135deg,#0d1a14 0%,#111e17 60%,#0e1a13 100%)">
       <div class="px-10 py-16 md:px-20 md:py-20">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -432,8 +438,13 @@
       emailjs.send('service_hk7wttn', 'template_x2k4bcn', {
         from_name: name,
         from_email: email,
-        service: 'Managed Support — ' + (type || 'Unspecified'),
-        message: desc || '(No description provided)'
+        service: 'Managed Support',
+        message: [
+          'Name: '    + name,
+          'Email: '   + email,
+          'Support Type: ' + (type || 'Unspecified'),
+          'Description: '  + (desc || '(No description provided)'),
+        ].join('\n')
       }).then(() => {
         btn.style.display = 'none';
         msg.style.color = '#4edea3';
