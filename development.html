@@ -80,7 +80,6 @@
     <a href="development.html" class="px-8 py-4 text-[#4edea3] font-bold text-sm border-b border-[#dde4dd]/5">Services</a>
     <a href="about.html" class="px-8 py-4 text-[#dde4dd] font-medium text-sm border-b border-[#dde4dd]/5">About</a>
     <a href="contact.html" class="px-8 py-4 text-[#dde4dd] font-medium text-sm border-b border-[#dde4dd]/5">Contact</a>
-    <div class="px-8 py-4"><button onclick="openInitiateModal();toggleMobileNav()" class="w-full bg-[#10B981] text-[#002111] py-3 rounded-lg font-bold text-sm">Get Started</button></div>
   </div>
 </nav>
 <script>function toggleMobileNav(){var n=document.getElementById('mobile-nav');n.style.display=n.style.display==='flex'?'none':'flex';}</script>
@@ -244,6 +243,31 @@
 <!-- Footer -->
 <footer class="bg-[#09100c]">
   <div class="px-8 py-20 max-w-7xl mx-auto">
+    <!-- CTA Band -->
+    <div class="mb-16 rounded-2xl overflow-hidden" style="border:1px solid rgba(78,222,163,0.15);background:linear-gradient(135deg,#0d1a14 0%,#111e17 60%,#0e1a13 100%)">
+      <div class="px-10 py-14 md:px-16 md:py-16">
+        <div class="flex flex-col lg:flex-row lg:items-center gap-12">
+          <div class="flex-1">
+            <span class="font-label text-primary uppercase tracking-[0.2em] text-xs font-bold mb-4 block">We Build For Others Too</span>
+            <h2 class="text-4xl md:text-6xl font-headline font-black text-on-surface leading-[0.92] mb-4" style="letter-spacing:-0.04em">Want a website<br><span style="background:linear-gradient(135deg,#4edea3 0%,#10B981 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">like ours?</span></h2>
+            <p class="text-on-surface-variant text-sm leading-relaxed max-w-sm">Zero templates. Precision-built. Drop your details and we'll reach out within 24 hours.</p>
+          </div>
+          <form id="footer-form" class="flex-1 flex flex-col gap-4" onsubmit="footerFormSubmit(event)">
+            <div class="flex flex-col sm:flex-row gap-3">
+              <input id="ff-name" type="text" placeholder="Your name" required autocomplete="name" style="flex:1;background:#1a211d;color:#dde4dd;border:1px solid #3f4940;border-radius:8px;padding:13px 16px;font-size:14px;font-family:Inter,sans-serif;outline:none;transition:border .2s" onfocus="this.style.borderColor='rgba(78,222,163,.5)'" onblur="this.style.borderColor='#3f4940'">
+              <input id="ff-email" type="email" placeholder="Your email" required autocomplete="email" style="flex:1;background:#1a211d;color:#dde4dd;border:1px solid #3f4940;border-radius:8px;padding:13px 16px;font-size:14px;font-family:Inter,sans-serif;outline:none;transition:border .2s" onfocus="this.style.borderColor='rgba(78,222,163,.5)'" onblur="this.style.borderColor='#3f4940'">
+            </div>
+            <input id="ff-idea" type="text" placeholder="What do you have in mind? (optional)" autocomplete="off" style="background:#1a211d;color:#dde4dd;border:1px solid #3f4940;border-radius:8px;padding:13px 16px;font-size:14px;font-family:Inter,sans-serif;outline:none;transition:border .2s" onfocus="this.style.borderColor='rgba(78,222,163,.5)'" onblur="this.style.borderColor='#3f4940'">
+            <div class="flex items-center gap-4">
+              <button id="ff-btn" type="submit" style="background:#10B981;color:#002111;padding:13px 28px;border-radius:8px;font-weight:700;font-size:14px;font-family:Inter,sans-serif;border:none;cursor:pointer;display:flex;align-items:center;gap:8px;transition:filter .2s;white-space:nowrap" onmouseover="this.style.filter='brightness(1.1)'" onmouseout="this.style.filter='none'">
+                Let's Talk <span class="material-symbols-outlined" style="font-size:18px">arrow_forward</span>
+              </button>
+              <span id="ff-msg" style="display:none;font-size:12px;font-family:Inter,sans-serif"></span>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
     <div class="grid grid-cols-1 md:grid-cols-4 gap-16 mb-20">
       <div>
         <div class="text-2xl font-bold text-on-surface tracking-tighter mb-8">Mindpress</div>
@@ -308,6 +332,7 @@
 </div>
 
 <script src="modal.js"></script>
+<script src="footer-form.js"></script>
 <script src="fx.js"></script>
 </body>
 </html>
